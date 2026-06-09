@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evergreen Botanicals - Product Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Evergreen Botanicals Premium Theme */
+            --forest-dark: #1A3626;
+            --forest-medium: #2C553C;
+            --forest-light: #e8edea;
+            --sand-light: #F9F6F0;
+            --sand-medium: #E8E1D5;
+            --accent-gold: #C19B6C;
+            --text-dark: #2C2C2C;
+            --text-light: #F9F6F0;
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            background-color: #cbd5e1; /* Neutral backdrop */
+            font-family: var(--font-sans);
+            color: var(--text-dark);
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Presentation Wrapper */
+        .presentation-deck {
+            width: 1280px;
+            height: 720px;
+            background-color: var(--sand-light);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            position: relative;
+            border-radius: 8px;
+        }
+
+        .presentation-deck::-webkit-scrollbar { width: 8px; }
+        .presentation-deck::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); }
+        .presentation-deck::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.2); border-radius: 4px; }
+
+        .slide {
+            width: 100%;
+            height: 720px;
+            scroll-snap-align: start;
+            padding: 60px 80px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: var(--sand-light);
+        }
+
+        .slide-dark {
+            background-color: var(--forest-dark);
+            color: var(--text-light);
+        }
+        
+        .slide-split {
+            display: flex;
+            flex-direction: row;
+            padding: 0;
+        }
+
+        .slide-split .col {
+            flex: 1;
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: var(--font-serif);
+            font-weight: 600;
+        }
+
+        p, li {
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .slide-title {
+            font-size: 52px;
+            color: var(--forest-dark);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .slide-dark .slide-title {
+            color: var(--text-light);
+        }
+
+        .slide-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-gold);
+        }
+
+        .slide-title.center {
+            text-align: center;
+        }
+        .slide-title.center::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: center;
+        }
+
+        .tag {
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 3px;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Hero Image Container */
+        .product-hero {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        .product-hero img {
+            max-width: 100%;
+            max-height: 480px;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(26, 54, 38, 0.1);
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .feature-box {
+            text-align: center;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            border-bottom: 4px solid var(--forest-medium);
+        }
+
+        .feature-box i {
+            font-size: 40px;
+            color: var(--accent-gold);
+            margin-bottom: 20px;
+        }
+
+        .feature-box h3 {
+            font-size: 24px;
+            color: var(--forest-dark);
+            margin-bottom: 15px;
+        }
+
+        /* Timeline / How to Use */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-top: 30px;
+            max-width: 800px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            background: rgba(232, 225, 213, 0.3);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .step-number {
+            font-family: var(--font-serif);
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--forest-medium);
+            margin-right: 30px;
+            line-height: 1;
+            opacity: 0.8;
+        }
+
+        /* Decorative Background Elements */
+        .leaf-bg {
+            position: absolute;
+            font-size: 400px;
+            color: rgba(26, 54, 38, 0.02);
+            right: -100px;
+            bottom: -100px;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .slide-dark .leaf-bg {
+            color: rgba(249, 246, 240, 0.03);
+        }
+
+        /* Scroll Hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--forest-medium);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-10px) translateX(-50%); }
+            60% { transform: translateY(-5px) translateX(-50%); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="presentation-deck">
+
+        <!-- Slide 1: Welcome/Hook -->
+        <div class="slide slide-dark" style="align-items: center; justify-content: center; text-align: center;">
+            <i class="fa-solid fa-leaf leaf-bg" style="left: 50%; top: 50%; transform: translate(-50%, -50%);"></i>
+            <div class="content" style="z-index: 2;">
+                <span class="tag" style="color: var(--sand-medium);">Introducing</span>
+                <h1 style="font-size: 80px; margin-bottom: 20px; letter-spacing: -1px;">Evergreen Botanicals</h1>
+                <h2 style="font-family: var(--font-sans); font-size: 24px; font-weight: 300; letter-spacing: 5px; text-transform: uppercase; color: var(--accent-gold);">Premium Linen Spray</h2>
+                <p style="margin-top: 40px; font-size: 20px; font-style: italic; opacity: 0.9;">Elevate your space. Naturally.</p>
+            </div>
+            <div class="scroll-hint" style="color: var(--sand-light);">
+                <span>Discover</span>
+                <i class="fa-solid fa-chevron-down" style="margin-top: 5px;"></i>
+            </div>
+        </div>
+
+        <!-- Slide 2: The Core Product Showcase (Using the provided image) -->
+        <div class="slide" style="background-color: var(--sand-medium);">
+            <div class="content">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <span class="tag">The Product</span>
+                    <h2 class="slide-title center" style="margin-bottom: 0;">The New Standard in Home Fragrance</h2>
+                </div>
+                
+                <div class="product-hero">
+                    <!-- EXACT IMAGE PROVIDED BY USER -->
+                    <img src="image (22).jpg" alt="Evergreen Botanicals Premium Linen Spray on a stone pedestal, alongside a tablet and mobile phone showing the brand's digital presence.">
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: What is its Value? (Halaga at Benefits) -->
+        <div class="slide">
+            <div class="content">
+                <span class="tag">Why Evergreen?</span>
+                <h2 class="slide-title">Uncompromising Quality</h2>
+                <p style="font-size: 22px; max-width: 900px; margin-bottom: 20px;">We believe your home should be your sanctuary—free from synthetic chemicals and artificial perfumes. Our Premium Linen Spray is crafted to provide peace of mind and sensory luxury.</p>
+
+                <div class="feature-grid">
+                    <div class="feature-box">
+                        <i class="fa-solid fa-seedling"></i>
+                        <h3>100% Organic</h3>
+                        <p>Made strictly from natural, plant-based essential oils. No artificial fragrances that cause headaches or allergies.</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fa-solid fa-globe"></i>
+                        <h3>Ethically Sourced</h3>
+                        <p>Ingredients harvested with respect for the environment and local farming communities around the globe.</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <h3>Phthalate-Free</h3>
+                        <p>Completely safe for your family and pets. We eliminate harmful chemical binders found in standard air fresheners.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: How to Use It -->
+        <div class="slide slide-split">
+            <div class="col" style="background-color: var(--forest-dark); color: var(--text-light);">
+                <i class="fa-solid fa-spray-can-sparkles leaf-bg"></i>
+                <span class="tag" style="color: var(--sand-light);">Application</span>
+                <h2 class="slide-title" style="color: var(--text-light);">How to Use It</h2>
+                <p style="font-size: 20px; margin-top: 20px; opacity: 0.9;">A single mist is all it takes to transform the atmosphere of any room. Designed for fabrics, perfect for the air.</p>
+            </div>
+            <div class="col">
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">01</div>
+                        <div>
+                            <h3 style="font-size: 24px; color: var(--forest-dark); margin-bottom: 10px;">The Evening Ritual</h3>
+                            <p>Spritz lightly over pillows and bedsheets 5 minutes before sleeping. The organic botanicals promote deep, restorative relaxation.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">02</div>
+                        <div>
+                            <h3 style="font-size: 24px; color: var(--forest-dark); margin-bottom: 10px;">Living Space Refresh</h3>
+                            <p>Mist over sofas, curtains, and rugs. It naturally neutralizes trapped odors instead of just masking them.</p>
+                        </div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">03</div>
+                        <div>
+                            <h3 style="font-size: 24px; color: var(--forest-dark); margin-bottom: 10px;">The Instant Reset</h3>
+                            <p>Use as a traditional room spray before guests arrive to instantly create a welcoming, high-end hotel ambiance.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: The Daily Impact (Useful for people) -->
+        <div class="slide">
+            <div class="content" style="align-items: center; text-align: center;">
+                <span class="tag">The Lifestyle</span>
+                <h2 class="slide-title center">An Everyday Luxury</h2>
+                
+                <p style="font-size: 24px; max-width: 800px; margin: 40px auto; color: var(--forest-dark); font-family: var(--font-serif); font-style: italic; line-height: 1.6;">
+                    "It’s not just about making a room smell good. It’s about signaling to your brain that it’s time to unwind, distress, and be present."
+                </p>
+
+                <div style="display: flex; gap: 40px; margin-top: 20px; text-align: left; max-width: 1000px;">
+                    <div style="flex: 1; padding: 30px; background: #fff; border-radius: 8px;">
+                        <h4 style="font-size: 20px; color: var(--accent-gold); margin-bottom: 15px;">For the Busy Professional</h4>
+                        <p>Instantly transitions your home from a chaotic workspace into a calming retreat after a long day.</p>
+                    </div>
+                    <div style="flex: 1; padding: 30px; background: #fff; border-radius: 8px;">
+                        <h4 style="font-size: 20px; color: var(--accent-gold); margin-bottom: 15px;">For the Homemaker</h4>
+                        <p>Provides a safe, non-toxic way to keep the house smelling fresh despite cooking odors, pets, or daily messes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Outro / Call to Action -->
+        <div class="slide slide-dark" style="align-items: center; justify-content: center; text-align: center;">
+            <div class="content">
+                <i class="fa-solid fa-droplet" style="font-size: 40px; color: var(--accent-gold); margin-bottom: 30px;"></i>
+                <h2 style="font-size: 60px; margin-bottom: 20px;">Ready to elevate your space?</h2>
+                <p style="font-size: 20px; margin-bottom: 40px; color: var(--sand-medium);">Experience the pure difference of Evergreen Botanicals.</p>
+                
+                <div style="padding: 15px 40px; border: 2px solid var(--accent-gold); display: inline-block; color: var(--accent-gold); font-family: var(--font-sans); text-transform: uppercase; letter-spacing: 2px; font-weight: 500; cursor: pointer;">
+                    Shop The Collection
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
